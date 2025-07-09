@@ -1,7 +1,5 @@
 import { fastify } from "fastify";
 
-import { sql } from "./db/connection.ts";
-
 import {
   serializerCompiler,
   validatorCompiler,
@@ -10,6 +8,7 @@ import {
 
 import { fastifyCors } from "@fastify/cors";
 import { env } from "./env.ts";
+import { getRooms } from "../http/routes/get-rooms.ts";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -23,6 +22,8 @@ app.setSerializerCompiler(serializerCompiler);
 app.get("/health", () => {
   return "OK";
 });
+
+app.register(getRooms);
 
 app
   .listen({ port: env.PORT })
