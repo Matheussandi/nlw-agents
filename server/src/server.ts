@@ -1,14 +1,16 @@
 import { fastify } from "fastify";
 
+import { fastifyCors } from "@fastify/cors";
+
 import {
   serializerCompiler,
   validatorCompiler,
   type ZodTypeProvider,
 } from "fastify-type-provider-zod";
 
-import { fastifyCors } from "@fastify/cors";
+import { getRooms } from "./http/routes/get-rooms.ts";
+
 import { env } from "./env.ts";
-import { getRooms } from "../http/routes/get-rooms.ts";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
