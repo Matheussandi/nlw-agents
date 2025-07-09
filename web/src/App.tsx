@@ -1,8 +1,14 @@
-export default function App() {
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { CreateRoom } from "./pages/CreateRoom";
+import { RoomDetails } from "./pages/RoomDetails";
 
+export default function App() {
   return (
-    <>
-      <h1>Vite + React + TypeScript</h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<CreateRoom />} index />
+        <Route path="/room" element={<RoomDetails />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
