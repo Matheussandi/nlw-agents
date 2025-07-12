@@ -6,6 +6,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
+import { useCreateRoom } from "@/http/use-create-room";
+import { toast } from "sonner";
 
 const createRoomSchema = z.object({
     name: z.string().min(3, "O nome da sala é obrigatório"),
@@ -15,6 +17,8 @@ const createRoomSchema = z.object({
 type CreateRoomFormData = z.infer<typeof createRoomSchema>;
 
 export function CreateRoomForm() {
+    const { mutateAsync: createRoom } = useCreateRoom();
+
     const createRoomForm = useForm<CreateRoomFormData>({
         resolver: zodResolver(createRoomSchema),
         defaultValues: {
@@ -23,9 +27,18 @@ export function CreateRoomForm() {
         },
     })
 
-    function handleCreateRoom(data: CreateRoomFormData) {
-        // Handle room creation logic here
-        console.log("Room created with data:", data);
+    async function handleCreateRoom({ name, description }: CreateRoomFormData) {
+        try {
+            await createRoom({ name, description });
+            toast.success("Sala criada com sucesso!", {
+                description: `A sala "${name}" foi criada e está pronta para uso.`
+            });
+            createRoomForm.reset();
+        } catch (error) {
+            toast.error("Erro ao criar sala", {
+                description: "Ocorreu um erro ao tentar criar a sala. Tente novamente."
+            });
+        }
     }
 
     return (

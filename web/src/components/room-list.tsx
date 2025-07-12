@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 import { Link } from "react-router-dom";
 
-import { useRooms } from "@/http/types/use-rooms";
+import { useRooms } from "@/http/use-rooms";
 
 import { dayjs } from "@/lib/dayjs";
 import { ArrowRight } from "lucide-react";
