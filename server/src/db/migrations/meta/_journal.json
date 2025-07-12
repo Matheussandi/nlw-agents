@@ -15,6 +15,13 @@
       "when": 1752097508660,
       "tag": "0001_cheerful_greymalkin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752338166303,
+      "tag": "0002_graceful_gorgon",
+      "breakpoints": true
     }
   ]
 }
