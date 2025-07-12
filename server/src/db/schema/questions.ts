@@ -1,4 +1,4 @@
-import { pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { rooms } from "./rooms.ts";
 
 export const questions = pgTable("questions", {
@@ -6,6 +6,8 @@ export const questions = pgTable("questions", {
   roomId: uuid()
     .references(() => rooms.id, { onDelete: "cascade" })
     .notNull(),
+  question: text().notNull(),
+  answer: text(),
   createdAt: timestamp().notNull().defaultNow(),
   updatedAt: timestamp().notNull().defaultNow(),
 });
