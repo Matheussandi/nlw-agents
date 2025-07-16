@@ -29,6 +29,13 @@
       "when": 1752343939616,
       "tag": "0003_normal_phalanx",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1752709798417,
+      "tag": "0004_broken_maverick",
+      "breakpoints": true
     }
   ]
 }
