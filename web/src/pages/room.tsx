@@ -2,9 +2,7 @@ import { ArrowLeft, Radio } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { QuestionForm } from '@/components/question-form'
-import { QuestionItem } from '@/components/question-item'
 import { QuestionList } from '@/components/question-list'
-
 
 type RoomParams = {
   roomId: string
@@ -22,7 +20,7 @@ export function Room() {
       <div className="container mx-auto max-w-4xl px-4 py-8">
         <div className="mb-8">
           <div className="mb-4 flex items-center justify-between">
-            <Link to="/create-room">
+            <Link to="/">
               <Button variant="outline">
                 <ArrowLeft className="mr-2 size-4" />
                 Criar Nova Sala
