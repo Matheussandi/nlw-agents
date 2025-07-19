@@ -44,3 +44,40 @@ export async function generateEmbedding(text: string) {
 
   return response.embeddings[0].values;
 }
+
+export async function generateAnswer(
+  question: string,
+  transcriptions: string[]
+) {
+  const context = transcriptions.join("\n\n");
+
+  const prompt = `
+    Com base no texto fornecido abaixo com contexto, responda à pergunta de forma clara e objetiva. Se a resposta não estiver presente no texto, diga que não foi possível encontrar uma resposta.
+
+    CONTEXTO:
+    ${context}
+
+    PERGUNTA:
+    ${question}
+
+    INSTRUÇÕES:
+    - Responda de forma clara e objetiva.
+    - Se a resposta não estiver presente no texto, diga que não foi possível encontrar uma resposta.
+    - Mantenha a resposta em português do Brasil.
+  `.trim();
+
+  const response = await gemini.models.generateContent({
+    model,
+    contents: [
+      {
+        text: prompt,
+      },
+    ],
+  });
+
+  if (!response.text) {
+    throw new Error("Não foi possível gerar a resposta.");
+  }
+
+  return response.text;
+}

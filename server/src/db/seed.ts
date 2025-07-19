@@ -1,10 +1,17 @@
 import { reset, seed } from "drizzle-seed";
 import { db, sql } from "./connection.ts";
-import { schema } from "./schema/index.ts";
+import { rooms } from "./schema/rooms.ts";
+import { questions } from "./schema/questions.ts";
 
-await reset(db, schema);
+// Criamos um schema sem a tabela audioChunks para evitar o erro com o tipo vector
+const seedSchema = {
+  rooms,
+  questions,
+};
 
-await seed(db, schema).refine((f) => {
+await reset(db, seedSchema);
+
+await seed(db, seedSchema).refine((f) => {
   return {
     rooms: {
       count: 5,
