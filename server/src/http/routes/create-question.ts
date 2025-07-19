@@ -49,9 +49,6 @@ export const createQuestionRoute: FastifyPluginCallbackZod = (app) => {
       if (chunks.length > 0) {
         const transcriptions = chunks.map((chunk) => chunk.transcription);
         answer = await generateAnswer(question, transcriptions);
-      } else {
-        answer =
-          "Não foi possível encontrar informações relevantes no áudio para responder à sua pergunta.";
       }
 
       const result = await db
